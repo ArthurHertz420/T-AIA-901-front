@@ -7,6 +7,7 @@
       color="primary"
       :icon="showForm === true ? 'keyboard_arrow_down': 'keyboard_arrow_up'"
       @click="showForm = ! showForm"
+      style="margin-bottom: 1em;"
     />
     <FormComponent
       v-on:close="close"
