@@ -14,11 +14,11 @@
     <q-tab-panels v-model="tab" animated>
       <q-tab-panel name="write">
         <!-- Call component to write request -->
-        <WriteComponent/>
+        <WriteComponent v-on:search="search($event)" v-on:cancel="closeForm()"/>
       </q-tab-panel>
       <q-tab-panel name="speak">
         <!-- Call component to tell the resquest -->
-        <SpeakComponent v-on:search="search($event)"/>
+        <SpeakComponent v-on:search="search($event)" v-on:cancel="closeForm()"/>
       </q-tab-panel>
     </q-tab-panels>
   </q-card>
