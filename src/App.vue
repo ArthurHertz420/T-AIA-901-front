@@ -17,6 +17,19 @@ export default {
   },
   components: {
     ModalGenerator
+  },
+  created () {
+    this.$root.$on('notify', this.showNotif)
+  },
+  methods: {
+    showNotif (props) {
+      this.$q.notify({
+        icon: props[0],
+        color: props[1],
+        message: this.$t(props[2]),
+        position: 'top-right'
+      })
+    }
   }
 }
 </script>
