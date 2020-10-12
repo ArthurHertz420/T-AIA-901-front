@@ -8,8 +8,8 @@
       active-bg-color="primary"
       active-color="white"
     >
-      <q-tab name="write" label="Ecrire"/>
-      <q-tab name="speak" label="parler"/>
+      <q-tab name="write" :label="$t('tabs.write')"/>
+      <q-tab name="speak" :label="$t('tabs.speak')"/>
     </q-tabs>
     <q-tab-panels v-model="tab" animated>
       <q-tab-panel name="write">

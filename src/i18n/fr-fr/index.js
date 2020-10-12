@@ -2,6 +2,16 @@
 // so you can safely delete all default props below
 
 export default {
-  failed: 'Action failed',
-  success: 'Action was successful'
+  tabs: {
+    write: 'Ecrire',
+    speak: 'Parler'
+  },
+  actions: {
+    cancel: 'Annuler',
+    retry: 'Recommencer',
+    search: 'Rechercher'
+  },
+  placeholders: {
+    write_request: 'Tapez votre requete ici'
+  }
 }
