@@ -8,17 +8,17 @@
       active-bg-color="primary"
       active-color="white"
     >
-      <q-tab name="write" label="Ecrire"/>
-      <q-tab name="speak" label="parler"/>
+      <q-tab name="write" :label="$t('tabs.write')"/>
+      <q-tab name="speak" :label="$t('tabs.speak')"/>
     </q-tabs>
     <q-tab-panels v-model="tab" animated>
       <q-tab-panel name="write">
         <!-- Call component to write request -->
-        <WriteComponent/>
+        <WriteComponent v-on:search="search($event)" v-on:cancel="closeForm()"/>
       </q-tab-panel>
       <q-tab-panel name="speak">
         <!-- Call component to tell the resquest -->
-        <SpeakComponent v-on:search="search($event)"/>
+        <SpeakComponent v-on:search="search($event)" v-on:cancel="closeForm()"/>
       </q-tab-panel>
     </q-tab-panels>
   </q-card>

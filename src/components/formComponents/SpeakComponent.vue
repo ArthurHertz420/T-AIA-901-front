@@ -11,17 +11,18 @@
     <div class="row justify-around" v-if="requestSend">
       <q-btn
         color="positive"
-        label="Rechercher"
+        :label="$t('actions.search')"
         v-on:click="search()"
       />
       <q-btn
         color="primary"
-        label="Recommencer"
+        :label="$t('actions.retry')"
         v-on:click="retry()"
       />
       <q-btn
         color="negative"
-        label="Annuler"
+        :label="$t('actions.cancel')"
+        v-on:click="cancel()"
       />
     </div>
   </div>

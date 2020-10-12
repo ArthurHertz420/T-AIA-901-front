@@ -1,17 +1,17 @@
 <template>
   <div>
     <div class="row" style="margin-bottom: 2em;">
-      <textarea class="col-12" v-model="query" placeholder="Tapez votre requête ici"></textarea>
+      <textarea class="col-12" v-model="query" :placeholder="$t('placeholders.write_request')"></textarea>
     </div>
     <div class="row justify-around">
       <q-btn
         color="positive"
-        label="Rechercher"
+        :label="$t('actions.search')"
         @click="search()"
       />
       <q-btn
         color="negative"
-        label="Annuler"
+        :label="$t('actions.cancel')"
         @click="cancel()"
       />
     </div>
