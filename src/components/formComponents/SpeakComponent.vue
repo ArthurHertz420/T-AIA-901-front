@@ -38,7 +38,17 @@ export default {
     }
   },
   methods: {
+    // Tu peux mettre ta route stp
     onResult (data) {
+      this.$axios({
+        method: 'get',
+        url: 'http://localhost:3000/api',
+        data: {
+          blob: data
+        }
+      }).then((response) => {
+        console.log(response)
+      })
       // TODO make the call to send the blob to the backend
       // console.log('The blob data:', data)
       // console.log('Downloadable audio', window.URL.createObjectURL(data))
