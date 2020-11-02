@@ -44,7 +44,7 @@ export default {
       var axios = require('axios')
       var audioContext = new AudioContext()
 
-      // Get webm file returned after end the streaming audio
+      // Convert blob returned to webm file
       var file = new File([data], 'output', {
         type: 'audio/webm',
         lastModified: new Date()
@@ -57,7 +57,7 @@ export default {
         if (err) throw err
 
         audioContext.decodeAudioData(resp, async function (buffer) {
-          // convert file to wav
+          // Convert file to wav
           var wav = toWav(buffer)
           var blob = new window.Blob([new DataView(wav)], {
             type: 'audio/wav'
@@ -67,7 +67,7 @@ export default {
           var formData = new FormData()
           formData.append('file', blob, 'output.wav')
 
-          // post the file
+          // Post the file
           await axios({
             method: 'post',
             url: 'https://stt-tts-middleware.herokuapp.com/api/stt/audio',
