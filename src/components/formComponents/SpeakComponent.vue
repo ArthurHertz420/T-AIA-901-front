@@ -38,20 +38,50 @@ export default {
     }
   },
   methods: {
-    // Tu peux mettre ta route stp
     onResult (data) {
-      this.$axios({
-        method: 'get',
-        url: 'http://localhost:3000/api',
-        data: {
-          blob: data
-        }
-      }).then((response) => {
-        console.log(response)
+      var toWav = require('audiobuffer-to-wav')
+      var xhr = require('xhr')
+      var axios = require('axios')
+      var audioContext = new AudioContext()
+
+      // Get webm file returned after end the streaming audio
+      var file = new File([data], 'output', {
+        type: 'audio/webm',
+        lastModified: new Date()
       })
-      // TODO make the call to send the blob to the backend
-      // console.log('The blob data:', data)
-      // console.log('Downloadable audio', window.URL.createObjectURL(data))
+
+      xhr({
+        uri: window.URL.createObjectURL(file),
+        responseType: 'arraybuffer'
+      }, function (err, body, resp) {
+        if (err) throw err
+
+        audioContext.decodeAudioData(resp, async function (buffer) {
+          // convert file to wav
+          var wav = toWav(buffer)
+          var blob = new window.Blob([new DataView(wav)], {
+            type: 'audio/wav'
+          })
+
+          // Create form data and append the file
+          var formData = new FormData()
+          formData.append('file', blob, 'output.wav')
+
+          // post the file
+          await axios({
+            method: 'post',
+            url: 'https://stt-tts-middleware.herokuapp.com/api/stt/audio',
+            data: formData,
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }).then((response) => {
+            // Show to front the text returned from middleware
+            console.log(response)
+          })
+        })
+      })
+
       this.requestSend = true
       this.result = 'test'
     },
