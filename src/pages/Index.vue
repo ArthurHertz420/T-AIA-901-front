@@ -1,14 +1,12 @@
 <template>
-  <q-page class="flex flex-center">
-    <div>{{result}}</div>
-    <q-footer class="flex flex-center" style="background-color: white;">
-      <FormRequestComponent/>
-    </q-footer>
+  <q-page>
+    <div style="height: 65vh">{{result}}</div>
+    <FormComponent/>
   </q-page>
 </template>
 
 <script>
-import FormRequestComponent from '../components/formComponents/FormRequestComponent'
+import FormComponent from 'components/formComponents/FormComponent'
 export default {
   name: 'PageIndex',
   data () {
@@ -17,7 +15,7 @@ export default {
     }
   },
   components: {
-    FormRequestComponent
+    FormComponent
   },
   created () {
     this.$root.$on('result', event => {
