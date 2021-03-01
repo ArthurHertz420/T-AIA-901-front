@@ -6,14 +6,8 @@
         @result="onResult"
         mode="hold"
       />
-      <textarea class="col-12" v-model="result" v-if="requestSend"></textarea>
     </div>
     <div class="row justify-around" v-if="requestSend">
-      <q-btn
-        color="positive"
-        :label="$t('actions.search')"
-        v-on:click="search()"
-      />
       <q-btn
         color="primary"
         :label="$t('actions.retry')"
@@ -43,6 +37,7 @@ export default {
       var xhr = require('xhr')
       var axios = require('axios')
       var audioContext = new AudioContext()
+      var self = this
 
       // Convert blob returned to webm file
       var file = new File([data], 'output', {
@@ -77,7 +72,7 @@ export default {
             }
           }).then((response) => {
             // Show to front the text returned from middleware
-            this.$root.$emit('result', response)
+            self.$root.$emit('result', response)
             console.log(response)
           })
         })
@@ -87,6 +82,7 @@ export default {
       this.result = 'test'
     },
     retry () {
+      document.location.reload()
       this.result = ''
       this.requestSend = false
     },
