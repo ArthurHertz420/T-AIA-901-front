@@ -68,15 +68,16 @@ export default {
           formData.append('file', blob, 'output.wav')
 
           // Post the file
-          await axios({
+          axios({
             method: 'post',
-            url: 'https://stt-tts-middleware.herokuapp.com/api/stt/audio',
+            url: 'http://127.0.0.1:3000/api/stt/audio',
             data: formData,
             headers: {
               'Content-Type': 'multipart/form-data'
             }
           }).then((response) => {
             // Show to front the text returned from middleware
+            this.$root.$emit('result', response)
             console.log(response)
           })
         })
